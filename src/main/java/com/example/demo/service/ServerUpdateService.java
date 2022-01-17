@@ -1,16 +1,30 @@
 package com.example.demo.service;
 
 import com.example.demo.repository.ServerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Collection;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ServerUpdateService {
-  @Autowired
-  private ServerRepository serverRepository;
-  @Autowired
-  private ServerRestrictions serverRestrictions;
+
+  private final ServerRepository serverRepository;
+  private final ServerRestrictions serverRestrictions;
+
+  public ServerUpdateService(
+      ServerRepository serverRepository,
+      ServerRestrictions serverRestrictions
+  ) {
+    this.serverRepository = serverRepository;
+    this.serverRestrictions = serverRestrictions;
+  }
+
+  @Transactional
+  public void switchOnServers(Collection<Long> serverIds) {
+    for (Long serverId : serverIds) {
+      switchOnServer(serverId);
+    }
+  }
 
   @Transactional
   public void switchOnServer(Long serverId) {

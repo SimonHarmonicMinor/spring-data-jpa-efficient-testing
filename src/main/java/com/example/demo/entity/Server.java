@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "server")
 public class Server {
-
   @Id
   @GeneratedValue(strategy = IDENTITY)
   @Column(name = "server_id")
