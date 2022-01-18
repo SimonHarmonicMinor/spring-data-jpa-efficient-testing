@@ -25,6 +25,7 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
     implementation "org.flywaydb:flyway-core"
+    testRuntimeOnly 'com.h2database:h2'
 }
 
 dependencyManagement {
