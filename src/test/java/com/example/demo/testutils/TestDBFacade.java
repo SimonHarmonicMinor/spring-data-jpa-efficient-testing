@@ -41,7 +41,7 @@ public class TestDBFacade {
   }
 
   @TestConfiguration
-  static class Config {
+  public static class Config {
     @Bean
     public TestDBFacade testDBFacade() {
       return new TestDBFacade();

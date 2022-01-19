@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import static com.example.demo.entity.Server.Type.JBOSS;
+import static com.example.demo.entity.ServerTestBuilder.aServer;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
