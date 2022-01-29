@@ -9,6 +9,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.transaction.support.TransactionTemplate;
 
 public class TestDBFacade {
+
   @Autowired
   private TestEntityManager testEntityManager;
   @Autowired
@@ -37,11 +38,27 @@ public class TestDBFacade {
   }
 
   public <T> T save(TestBuilder<T> builder) {
-    return transactionTemplate.execute(status -> testEntityManager.persistAndFlush(builder.build()));
+    return transactionTemplate.execute(
+        status -> testEntityManager.persistAndFlush(builder.build()));
+  }
+
+  public <T> TestBuilder<T> persistedOnce(TestBuilder<T> builder) {
+    return new TestBuilder<>() {
+      private T entity;
+
+      @Override
+      public T build() {
+        if (entity == null) {
+          entity = save(builder);
+        }
+        return entity;
+      }
+    };
   }
 
   @TestConfiguration
   public static class Config {
+
     @Bean
     public TestDBFacade testDBFacade() {
       return new TestDBFacade();
