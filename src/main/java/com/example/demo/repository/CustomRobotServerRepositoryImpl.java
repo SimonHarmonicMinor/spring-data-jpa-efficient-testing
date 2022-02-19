@@ -4,11 +4,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class CustomServerRepositoryImpl implements
-    CustomServerRepository {
+class CustomRobotServerRepositoryImpl implements
+    CustomRobotServerRepository {
 
   @Override
-  public Page<ServerView> findByFilter(ServerFilter filter, int page, int pageSize) {
+  public Page<RobotView> findByFilter(RobotFilter filter, int page, int pageSize) {
     // stub
     return Page.empty();
   }

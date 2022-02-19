@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import static com.example.demo.entity.ServerTestBuilder.aServer;
+import static com.example.demo.entity.RobotTestBuilder.aRobot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.demo.testutils.TestDBFacade;
@@ -12,21 +12,21 @@ import org.springframework.context.annotation.Import;
 
 @DataJpaTest
 @Import(TestDBFacade.class)
-class ServerRepositoryTest {
+class RobotRepositoryTest {
   @Autowired
-  private ServerRepository serverRepository;
+  private RobotRepositoryRobot robotRepository;
   @Autowired
   private TestDBFacade db;
 
   @Test
   void shouldReturnUniqueNames() {
     db.saveAll(
-        aServer().withName("s1"),
-        aServer().withName("s1"),
-        aServer().withName("s2")
+        aRobot().withName("s1"),
+        aRobot().withName("s1"),
+        aRobot().withName("s2")
     );
 
-    final var names = serverRepository.findUniqueNames();
+    final var names = robotRepository.findUniqueNames();
 
     assertEquals(Set.of("s1", "s2"), names);
   }

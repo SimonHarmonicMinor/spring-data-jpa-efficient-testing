@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true, noRollbackFor = Exception.class)
 @Documented
 public @interface ReadTransactional {
-
   @AliasFor(annotation = Transactional.class, attribute = "value")
   String value() default "";
 

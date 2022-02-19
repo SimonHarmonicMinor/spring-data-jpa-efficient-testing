@@ -1,15 +1,16 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.Server;
-import com.example.demo.entity.Server.Type;
+import com.example.demo.entity.Robot;
+import com.example.demo.entity.Robot.Type;
 import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface ServerRepository extends JpaRepository<Server, Long>, CustomServerRepository {
+public interface RobotRepositoryRobot extends JpaRepository<Robot, Long>,
+    CustomRobotServerRepository {
 
   long countAllByTypeAndIdNot(Type type, Long id);
 
-  @Query("SELECT DISTINCT name FROM Server")
+  @Query("SELECT DISTINCT name FROM Robot")
   Set<String> findUniqueNames();
 }

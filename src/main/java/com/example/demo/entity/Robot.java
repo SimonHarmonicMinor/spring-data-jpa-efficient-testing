@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "server")
-public class Server {
+public class Robot {
   @Id
   @GeneratedValue(strategy = IDENTITY)
   @Column(name = "server_id")
@@ -31,9 +31,9 @@ public class Server {
   private Type type;
 
   public enum Type {
-    JBOSS,
-    TOMCAT,
-    WEB_LOGIC
+    DRIVER,
+    LOADER,
+    VACUUM
   }
 
   public Long getId() {

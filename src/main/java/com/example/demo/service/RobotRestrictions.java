@@ -5,16 +5,16 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 
 import com.example.demo.annotation.ReadTransactional;
 import com.example.demo.exception.OperationRestrictedException;
-import com.example.demo.repository.ServerRepository;
+import com.example.demo.repository.RobotRepositoryRobot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ServerRestrictions {
+public class RobotRestrictions {
 
   @Autowired
-  private ServerRepository serverRepository;
+  private RobotRepositoryRobot robotRepository;
 
   @Transactional(readOnly = true)
   public void checkSwitchOn(Long serverId) {
@@ -38,14 +38,14 @@ public class ServerRestrictions {
 
   private void innerCheckSwitchOn(Long serverId) {
     final var server =
-        serverRepository.findById(serverId)
+        robotRepository.findById(serverId)
             .orElseThrow();
     if (server.isSwitched()) {
       throw new OperationRestrictedException(
           format("Server %s is already switched on", server.getName())
       );
     }
-    final var count = serverRepository.countAllByTypeAndIdNot(server.getType(), serverId);
+    final var count = robotRepository.countAllByTypeAndIdNot(server.getType(), serverId);
     if (count >= 3) {
       throw new OperationRestrictedException(
           format("There is already 3 switched on servers of type %s", server.getType())

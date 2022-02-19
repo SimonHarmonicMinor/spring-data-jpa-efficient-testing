@@ -1,13 +1,13 @@
 package com.example.demo.service;
 
-import static com.example.demo.entity.ServerTestBuilder.aServer;
+import static com.example.demo.entity.RobotTestBuilder.aRobot;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 
-import com.example.demo.entity.Server;
+import com.example.demo.entity.Robot;
 import com.example.demo.exception.OperationRestrictedException;
 import com.example.demo.testutils.TestDBFacade;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,13 +23,13 @@ import org.springframework.context.annotation.Import;
 @AutoConfigureTestDatabase
 @AutoConfigureTestEntityManager
 @Import(TestDBFacade.Config.class)
-class ServerUpdateServiceTestH2TestDataBuilder {
+class RobotUpdateServiceTestH2TestDataBuilder {
   @Autowired
-  private ServerUpdateService service;
+  private RobotUpdateService service;
   @Autowired
   private TestDBFacade db;
   @MockBean
-  private ServerRestrictions serverRestrictions;
+  private RobotRestrictions robotRestrictions;
 
   @BeforeEach
   void beforeEach() {
@@ -38,23 +38,23 @@ class ServerUpdateServiceTestH2TestDataBuilder {
 
   @Test
   void shouldSwitchOnSuccessfully() {
-    final var id = db.save(aServer().withSwitched(false)).getId();
-    doNothing().when(serverRestrictions).checkSwitchOn(id);
+    final var id = db.save(aRobot().withSwitched(false)).getId();
+    doNothing().when(robotRestrictions).checkSwitchOn(id);
 
-    service.switchOnServer(id);
+    service.switchOnRobot(id);
 
-    final var savedServer  = db.find(id, Server.class);
+    final var savedServer  = db.find(id, Robot.class);
     assertTrue(savedServer.isSwitched());
   }
 
   @Test
   void shouldRollbackIfCannotSwitchOn() {
-    final var id = db.save(aServer().withSwitched(false)).getId();
-    doThrow(new OperationRestrictedException("")).when(serverRestrictions).checkSwitchOn(id);
+    final var id = db.save(aRobot().withSwitched(false)).getId();
+    doThrow(new OperationRestrictedException("")).when(robotRestrictions).checkSwitchOn(id);
 
-    assertThrows(OperationRestrictedException.class, () -> service.switchOnServer(id));
+    assertThrows(OperationRestrictedException.class, () -> service.switchOnRobot(id));
 
-    final var savedServer  = db.find(id, Server.class);
-    assertFalse(savedServer.isSwitched());
+    final var savedRobot  = db.find(id, Robot.class);
+    assertFalse(savedRobot.isSwitched());
   }
 }
