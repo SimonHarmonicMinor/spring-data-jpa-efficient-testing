@@ -10,7 +10,7 @@ import static org.springframework.transaction.annotation.Propagation.NOT_SUPPORT
 
 import com.example.demo.entity.Robot;
 import com.example.demo.exception.OperationRestrictedException;
-import com.example.demo.repository.RobotRepositoryRobot;
+import com.example.demo.repository.RobotRepository;
 import com.example.demo.testutils.TestDBFacade;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,7 +51,7 @@ class RobotUpdateServiceTestH2DataJpaNonTransactional {
 
     @Bean
     public RobotUpdateService service(
-        RobotRepositoryRobot robotRepository,
+        RobotRepository robotRepository,
         RobotRestrictions robotRestrictions
     ) {
       return new RobotUpdateService(robotRepository, robotRestrictions);

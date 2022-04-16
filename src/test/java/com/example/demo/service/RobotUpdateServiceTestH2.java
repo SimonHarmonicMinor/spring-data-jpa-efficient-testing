@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import static com.example.demo.entity.Robot.Type.DRIVER;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,7 +10,8 @@ import static org.mockito.Mockito.doThrow;
 
 import com.example.demo.entity.Robot;
 import com.example.demo.exception.OperationRestrictedException;
-import com.example.demo.repository.RobotRepositoryRobot;
+import com.example.demo.repository.RobotRepository;
+import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,18 @@ class RobotUpdateServiceTestH2 {
   @Autowired
   private RobotUpdateService service;
   @Autowired
-  private RobotRepositoryRobot robotRepository;
+  private RobotRepository robotRepository;
   @MockBean
   private RobotRestrictions robotRestrictions;
 
   @BeforeEach
   void beforeEach() {
     robotRepository.deleteAll();
+  }
+
+  @Test
+  void fail() {
+    assertEquals(0, 1, "Unexpected weather status for date " + LocalDate.now());
   }
 
   @Test

@@ -6,18 +6,17 @@ import static javax.persistence.GenerationType.IDENTITY;
 import com.sun.istack.NotNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "server")
+@Table(name = "robot")
 public class Robot {
   @Id
   @GeneratedValue(strategy = IDENTITY)
-  @Column(name = "server_id")
+  @Column(name = "robot_id")
   private Long id;
 
   @NotNull
@@ -62,5 +61,15 @@ public class Robot {
 
   public void setType(Type type) {
     this.type = type;
+  }
+
+  public Robot(String name, boolean switched, Type type) {
+    this.name = name;
+    this.switched = switched;
+    this.type = type;
+  }
+
+  public Robot() {
+
   }
 }

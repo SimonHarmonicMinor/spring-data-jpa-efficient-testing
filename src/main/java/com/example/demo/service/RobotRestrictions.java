@@ -5,7 +5,7 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 
 import com.example.demo.annotation.ReadTransactional;
 import com.example.demo.exception.OperationRestrictedException;
-import com.example.demo.repository.RobotRepositoryRobot;
+import com.example.demo.repository.RobotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RobotRestrictions {
 
   @Autowired
-  private RobotRepositoryRobot robotRepository;
+  private RobotRepository robotRepository;
 
   @Transactional(readOnly = true)
   public void checkSwitchOn(Long serverId) {

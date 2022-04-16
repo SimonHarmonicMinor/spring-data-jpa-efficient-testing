@@ -9,7 +9,7 @@ import static org.mockito.Mockito.doThrow;
 
 import com.example.demo.entity.Robot;
 import com.example.demo.exception.OperationRestrictedException;
-import com.example.demo.repository.RobotRepositoryRobot;
+import com.example.demo.repository.RobotRepository;
 import com.example.demo.testutils.TestDBFacade;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ class RobotUpdateServiceTestH2DataJpa {
 
     @Bean
     public RobotUpdateService service(
-        RobotRepositoryRobot robotRepository,
+        RobotRepository robotRepository,
         RobotRestrictions robotRestrictions
     ) {
       return new RobotUpdateService(robotRepository, robotRestrictions);

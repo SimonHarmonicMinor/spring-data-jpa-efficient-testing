@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.repository.RobotFilter;
-import com.example.demo.repository.RobotRepositoryRobot;
+import com.example.demo.repository.RobotRepository;
 import com.example.demo.repository.RobotView;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RobotViewService {
-  private final RobotRepositoryRobot robotRepository;
+  private final RobotRepository robotRepository;
   private final AuditService auditService;
 
-  public RobotViewService(RobotRepositoryRobot robotRepository,
+  public RobotViewService(RobotRepository robotRepository,
       AuditService auditService) {
     this.robotRepository = robotRepository;
     this.auditService = auditService;

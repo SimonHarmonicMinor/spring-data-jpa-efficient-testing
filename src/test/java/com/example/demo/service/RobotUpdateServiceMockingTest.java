@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 
 import com.example.demo.entity.Robot;
 import com.example.demo.exception.OperationRestrictedException;
-import com.example.demo.repository.RobotRepositoryRobot;
+import com.example.demo.repository.RobotRepository;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class RobotUpdateServiceMockingTest {
   @Mock
-  private RobotRepositoryRobot robotRepository;
+  private RobotRepository robotRepository;
   @Mock
   private RobotRestrictions robotRestrictions;
   private RobotUpdateService service;

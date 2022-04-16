@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 @Import(TestDBFacade.class)
 class RobotRepositoryTest {
   @Autowired
-  private RobotRepositoryRobot robotRepository;
+  private RobotRepository robotRepository;
   @Autowired
   private TestDBFacade db;
 

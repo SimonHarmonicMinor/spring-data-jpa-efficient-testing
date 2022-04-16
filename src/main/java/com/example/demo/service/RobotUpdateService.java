@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
-import com.example.demo.repository.RobotRepositoryRobot;
+import com.example.demo.repository.RobotRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RobotUpdateService {
 
-  private final RobotRepositoryRobot robotRepository;
+  private final RobotRepository robotRepository;
   private final RobotRestrictions robotRestrictions;
 
   public RobotUpdateService(
-      RobotRepositoryRobot robotRepository,
+      RobotRepository robotRepository,
       RobotRestrictions robotRestrictions
   ) {
     this.robotRepository = robotRepository;
