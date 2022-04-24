@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import static com.example.demo.service.OperationStatus.ALLOWED;
 import static com.example.demo.service.OperationStatus.RESTRICTED;
-import static com.example.demo.service.OperationStatus.SERVER_IS_ABSENT;
+import static com.example.demo.service.OperationStatus.ROBOT_IS_ABSENT;
 import static java.lang.String.format;
 
 import com.example.demo.annotation.ReadTransactional;
@@ -71,7 +71,7 @@ public class RobotAllowedOperations {
       return ALLOWED;
     } catch (NoSuchElementException e) {
       LOG.debug(format("Server with id %s is absent", robotId), e);
-      return SERVER_IS_ABSENT;
+      return ROBOT_IS_ABSENT;
     } catch (OperationRestrictedException e) {
       LOG.debug(format("Server with id %s cannot be switched on", robotId), e);
       return RESTRICTED;

@@ -50,7 +50,7 @@ class RobotAllowedOperationsTest {
   }
 
   @Test
-  @Disabled("Always fails due to rollback-only behavior")
+  //@Disabled("Always fails due to rollback-only behavior")
   void shouldNotAllowSomeRobotsToSwitchOn() {
     innerShouldNotAllowSomeRobotsToSwitchOn(robotAllowedOperations::getRobotsSwitchOnStatus);
   }
@@ -73,17 +73,17 @@ class RobotAllowedOperationsTest {
   private void innerShouldNotAllowSomeRobotsToSwitchOn(
       Function<Collection<Long>, Map<Long, OperationStatus>> function) {
     final var driver = db.save(
-        aRobot().withSwitched(true).withType(DRIVER)
+        aRobot().switched(true).type(DRIVER)
     );
     final var loader = db.save(
-        aRobot().withSwitched(false).withType(LOADER)
+        aRobot().switched(false).type(LOADER)
     );
-    final var vacuumTemplate = aRobot().withSwitched(false).withType(VACUUM);
+    final var vacuumTemplate = aRobot().switched(false).type(VACUUM);
     final var vacuum = db.save(vacuumTemplate);
     db.saveAll(
-        vacuumTemplate.withSwitched(true),
-        vacuumTemplate.withSwitched(true),
-        vacuumTemplate.withSwitched(true)
+        vacuumTemplate.switched(true),
+        vacuumTemplate.switched(true),
+        vacuumTemplate.switched(true)
     );
     final var robotsIds = List.of(driver.getId(), loader.getId(), vacuum.getId());
 

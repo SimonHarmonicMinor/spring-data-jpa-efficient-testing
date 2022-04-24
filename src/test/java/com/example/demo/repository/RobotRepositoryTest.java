@@ -21,9 +21,9 @@ class RobotRepositoryTest {
   @Test
   void shouldReturnUniqueNames() {
     db.saveAll(
-        aRobot().withName("s1"),
-        aRobot().withName("s1"),
-        aRobot().withName("s2")
+        aRobot().name("s1"),
+        aRobot().name("s1"),
+        aRobot().name("s2")
     );
 
     final var names = robotRepository.findUniqueNames();

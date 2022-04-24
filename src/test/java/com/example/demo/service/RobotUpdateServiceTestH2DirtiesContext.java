@@ -22,7 +22,6 @@ import org.springframework.test.annotation.DirtiesContext;
 @AutoConfigureTestDatabase
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 class RobotUpdateServiceTestH2DirtiesContext {
-
   @Autowired
   private RobotUpdateService service;
   @Autowired
@@ -32,7 +31,6 @@ class RobotUpdateServiceTestH2DirtiesContext {
 
   @Test
   void shouldSwitchOnSuccessfully() {
-
     final var robot = new Robot();
     robot.setSwitched(false);
     robot.setType(DRIVER);

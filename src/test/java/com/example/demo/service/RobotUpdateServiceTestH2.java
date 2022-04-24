@@ -35,11 +35,6 @@ class RobotUpdateServiceTestH2 {
   }
 
   @Test
-  void fail() {
-    assertEquals(0, 1, "Unexpected weather status for date " + LocalDate.now());
-  }
-
-  @Test
   void shouldSwitchOnSuccessfully() {
     final var robot = new Robot();
     robot.setSwitched(false);

@@ -38,7 +38,7 @@ class RobotUpdateServiceTestH2TestDataBuilder {
 
   @Test
   void shouldSwitchOnSuccessfully() {
-    final var id = db.save(aRobot().withSwitched(false)).getId();
+    final var id = db.save(aRobot().switched(false)).getId();
     doNothing().when(robotRestrictions).checkSwitchOn(id);
 
     service.switchOnRobot(id);
@@ -49,7 +49,7 @@ class RobotUpdateServiceTestH2TestDataBuilder {
 
   @Test
   void shouldRollbackIfCannotSwitchOn() {
-    final var id = db.save(aRobot().withSwitched(false)).getId();
+    final var id = db.save(aRobot().switched(false)).getId();
     doThrow(new OperationRestrictedException("")).when(robotRestrictions).checkSwitchOn(id);
 
     assertThrows(OperationRestrictedException.class, () -> service.switchOnRobot(id));

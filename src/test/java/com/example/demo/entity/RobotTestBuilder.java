@@ -6,7 +6,9 @@ import com.example.demo.entity.Robot.Type;
 import com.example.demo.testutils.TestBuilder;
 import java.util.function.Consumer;
 
+
 public class RobotTestBuilder implements TestBuilder<Robot> {
+
   private String name = "";
   private boolean switched = false;
   private Type type = DRIVER;
@@ -24,15 +26,15 @@ public class RobotTestBuilder implements TestBuilder<Robot> {
     return new RobotTestBuilder();
   }
 
-  public RobotTestBuilder withName(String name) {
+  public RobotTestBuilder name(String name) {
     return copyWith(b -> b.name = name);
   }
 
-  public RobotTestBuilder withSwitched(boolean switched) {
+  public RobotTestBuilder switched(boolean switched) {
     return copyWith(b -> b.switched = switched);
   }
 
-  public RobotTestBuilder withType(Type type) {
+  public RobotTestBuilder type(Type type) {
     return copyWith(b -> b.type = type);
   }
 

@@ -19,7 +19,7 @@ public class TestDBFacade {
 
   public void cleanDatabase() {
     transactionTemplate.execute(status -> {
-      JdbcTestUtils.deleteFromTables(jdbcTemplate, "server");
+      JdbcTestUtils.deleteFromTables(jdbcTemplate, "robot");
       return null;
     });
   }

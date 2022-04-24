@@ -20,7 +20,6 @@ public class RobotUpdateService {
 
   @Transactional
   public void switchOnRobot(Long robotId) {
-    reallyLongOperation();
     final var robot =
         robotRepository.findById(robotId)
             .orElseThrow();

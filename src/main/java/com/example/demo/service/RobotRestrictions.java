@@ -36,19 +36,19 @@ public class RobotRestrictions {
     innerCheckSwitchOn(serverId);
   }
 
-  private void innerCheckSwitchOn(Long serverId) {
-    final var server =
-        robotRepository.findById(serverId)
+  private void innerCheckSwitchOn(Long robotId) {
+    final var robot =
+        robotRepository.findById(robotId)
             .orElseThrow();
-    if (server.isSwitched()) {
+    if (robot.isSwitched()) {
       throw new OperationRestrictedException(
-          format("Server %s is already switched on", server.getName())
+          format("Robot %s is already switched on", robot.getName())
       );
     }
-    final var count = robotRepository.countAllByTypeAndIdNot(server.getType(), serverId);
+    final var count = robotRepository.countAllByTypeAndIdNot(robot.getType(), robotId);
     if (count >= 3) {
       throw new OperationRestrictedException(
-          format("There is already 3 switched on servers of type %s", server.getType())
+          format("There is already 3 switched on robots of type %s", robot.getType())
       );
     }
   }

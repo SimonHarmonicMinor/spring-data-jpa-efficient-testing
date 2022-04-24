@@ -12,11 +12,8 @@ import com.example.demo.entity.Robot;
 import com.example.demo.exception.OperationRestrictedException;
 import com.example.demo.repository.RobotRepository;
 import com.example.demo.testutils.TestDBFacade;
-import javax.sql.DataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -36,10 +33,6 @@ class RobotUpdateServiceTestH2DataJpaNonTransactional {
   private TestDBFacade db;
   @MockBean
   private RobotRestrictions robotRestrictions;
-  @Autowired
-  private DataSource dataSource;
-  private static final Logger log = LoggerFactory.getLogger(
-      RobotUpdateServiceTestH2DataJpaNonTransactional.class);
 
   @BeforeEach
   void beforeEach() {
@@ -60,7 +53,7 @@ class RobotUpdateServiceTestH2DataJpaNonTransactional {
 
   @Test
   void shouldSwitchOnSuccessfully() {
-    final var id = db.save(aRobot().withSwitched(false)).getId();
+    final var id = db.save(aRobot().switched(false)).getId();
     doNothing().when(robotRestrictions).checkSwitchOn(id);
 
     service.switchOnRobot(id);
@@ -71,7 +64,7 @@ class RobotUpdateServiceTestH2DataJpaNonTransactional {
 
   @Test
   void shouldRollbackIfCannotSwitchOn() {
-    final var id = db.save(aRobot().withSwitched(false)).getId();
+    final var id = db.save(aRobot().switched(false)).getId();
     doThrow(new OperationRestrictedException("")).when(robotRestrictions).checkSwitchOn(id);
 
     assertThrows(OperationRestrictedException.class, () -> service.switchOnRobot(id));
