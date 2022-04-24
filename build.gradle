@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "io.freefair.lombok" version "6.4.3"
 }
 
 group = 'com.example'
@@ -14,18 +15,18 @@ repositories {
 
 ext {
     set('testcontainersVersion', "1.16.0")
+    set('lombokVersion', '1.8.24')
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.flywaydb:flyway-core"
     runtimeOnly 'org.postgresql:postgresql'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
-    implementation "org.flywaydb:flyway-core"
     testRuntimeOnly 'com.h2database:h2'
     // testRuntimeOnly 'org.apache.derby:derby'
     // testRuntimeOnly 'org.hsqldb:hsqldb'
