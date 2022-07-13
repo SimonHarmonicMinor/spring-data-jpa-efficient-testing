@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +22,22 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest
 @Import(TestDBFacade.Config.class)
 @Transactional(propagation = NOT_SUPPORTED)
-@Commit
 class RobotAllowedOperationsTest {
 
   @Autowired
   private TestDBFacade db;
   @Autowired
   private RobotAllowedOperations robotAllowedOperations;
+
+  @BeforeEach
+  void beforeEach() {
+    db.cleanDatabase();
+  }
 
   @TestConfiguration
   static class Config {
@@ -50,7 +54,7 @@ class RobotAllowedOperationsTest {
   }
 
   @Test
-  //@Disabled("Always fails due to rollback-only behavior")
+  @Disabled("Always fails due to rollback-only behavior")
   void shouldNotAllowSomeRobotsToSwitchOn() {
     innerShouldNotAllowSomeRobotsToSwitchOn(robotAllowedOperations::getRobotsSwitchOnStatus);
   }

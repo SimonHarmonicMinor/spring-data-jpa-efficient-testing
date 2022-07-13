@@ -24,7 +24,7 @@ public class RobotUpdateService {
         robotRepository.findById(robotId)
             .orElseThrow();
     robot.setSwitched(true);
-    robotRepository.saveAndFlush(robot);
+    robotRepository.flush();
     robotRestrictions.checkSwitchOn(robotId);
   }
 

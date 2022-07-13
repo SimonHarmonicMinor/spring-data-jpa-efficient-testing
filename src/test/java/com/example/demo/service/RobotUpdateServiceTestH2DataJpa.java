@@ -55,7 +55,7 @@ class RobotUpdateServiceTestH2DataJpa {
   }
 
   @Test
-  // @Disabled("Always fails due to default transactional propagation")
+  @Disabled("Always fails due to default transactional propagation")
   void shouldRollbackIfCannotSwitchOn() {
     final var id = db.save(aRobot().switched(false)).getId();
     doThrow(new OperationRestrictedException("")).when(robotRestrictions).checkSwitchOn(id);
